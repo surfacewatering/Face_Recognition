@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+<div class="container emp-profile">
+
+    <div class="row">
+        <div style="display: flex ;justify-content: center; align-items: center;" class="col">
+                <img src="{% static 'images/On_Time.png' %}" width="300px">
+        </div>
+    </div>
+    <hr><br>
+    <div class="row">
+        <div style="display: flex; justify-content: center; align-items: center;" class="col">
+        <a id="scanbut" class="btn" href={% url 'scan' %}>SCAN</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div style="display: flex; justify-content: center; align-items: center;" class="col">
+        <a class="btn" href={% url 'profiles' %}>PROFILES</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div style="display: flex; justify-content: center; align-items: center;" class="col">
+        <a class="btn" href={% url 'status' %}>STATUS</a>
+        </div>
+    </div>
+</div>
+<script>
+    $('#scanbut').click(function () {
+        $.ajax({url: "{% url 'scanfunc' %}"
+        });
+    });
+</script>
+{% endblock body %}

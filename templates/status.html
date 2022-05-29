@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Status{% endblock title %}
+
+{% block body %}
+<div class="container emp-profile">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a style="color:rgba(79,2,71,0.5)" class="nav-link active" id="present-tab" data-toggle="tab" href="#present" role="tab">Present</a>
+        </li>
+        <li class="nav-item">
+            <a style="color:rgba(79,2,71,0.5)" class="nav-link" id="absent-tab" data-toggle="tab" href="#absent" role="tab">Absent</a>
+        </li>
+        <li class="nav-item">
+            <a style="color:rgba(79,2,71,0.5)" class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab">History</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <br>
+        <div class="tab-pane fade show active" id="present">
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th scope="col"> </th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last name</th>
+                        <th scope="col">Entry Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profile in pres %}
+                    <tr>
+                        <th scope="row">-</th>
+                        <td>{{ profile.first_name }}</td>
+                        <td>{{ profile.last_name }}</td>
+                        <td>{{ profile.updated |date:"h:iA" }}</td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <a href="{% url 'reset' %}"><button class="btn">Reset</button></a>
+                <a href="{% url 'status' %}"><button class="btn">Refresh</button></a>
+                <a href="{% url 'main' %}"><button class="btn">Home</button></a>
+            </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="absent">
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th scope="col"> </th>
+                        <th scope="col">First name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Profession</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profile in absent %}
+                    <tr>
+                        <th scope="row">-</th>
+                        <td>{{ profile.first_name }}</td>
+                        <td>{{ profile.last_name }}</td>
+                        <td>{{ profile.profession }}</td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <a href="{% url 'main' %}"><button class="btn">Home</button></a>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="history">
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th scope="col"> </th>
+                        <th scope="col">Profile ID</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for face in scanned %}
+                    <tr>
+                        <th scope="row">-</th>
+                        <td>{{ face.pface }}</td>
+                        <td>{{ face.dt }}</td>
+
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <a href="{% url 'clear_hist' %}"><button class="btn">Clear History</button></a>
+                <a href="{% url 'main' %}"><button class="btn">Home</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
